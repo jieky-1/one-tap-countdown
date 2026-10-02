@@ -31,7 +31,7 @@ jobs:
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
-            -derivedDataPath DerivedData \
+            SYMROOT="$GITHUB_WORKSPACE/SymBuild" \
             CODE_SIGNING_ALLOWED=NO \
             build 2>&1 | tee build.log
 
@@ -58,7 +58,8 @@ jobs:
 
       - name: Install & launch app
         run: |
-          APP="$GITHUB_WORKSPACE/DerivedData/Build/Products/Debug-iphonesimulator/CountdownClock.app"
+          APP=$(find "$GITHUB_WORKSPACE/SymBuild" -type d -name "CountdownClock.app" | head -1)
+          echo "app: $APP"
           ls -d "$APP"
           xcrun simctl install booted "$APP"
           xcrun simctl launch booted com.example.OneTapCountdown
