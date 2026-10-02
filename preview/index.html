@@ -272,6 +272,10 @@
           <div class="sub">☀️ 非夜间区间 · <span id="dayDurText"></span></div>
           <div class="wheels" id="dayDurWheels"></div>
         </div>
+        <div style="text-align:center">
+          <button class="linkbtn" id="btnCopyCfg">复制配置链接（换入口时迁移设置）</button>
+          <div class="hint" id="cfgLink" style="word-break:break-all;margin-top:6px"></div>
+        </div>
         <div style="height:20px"></div>
       </div>
     </div>
@@ -324,7 +328,28 @@ function toast(msg){
   clearTimeout(el._t);
   el._t = setTimeout(() => el.classList.remove("show"), 1800);
 }
-const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const save = () => {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); return true; }
+  catch (e) { return false; }          // 无痕模式/存储被禁用时降级
+};
+
+/// 配置链接：?cfg=<base64>，用于跨入口（Safari / 主屏幕图标）迁移设置
+function encodeCfg(){
+  try { return btoa(unescape(encodeURIComponent(JSON.stringify(S)))); } catch (e) { return ""; }
+}
+function applyCfg(text){
+  try {
+    const obj = JSON.parse(decodeURIComponent(escape(atob(text))));
+    S = Object.assign({}, DEF, obj);
+    save();
+    return true;
+  } catch (e) { return false; }
+}
+let importedFromLink = false;
+try {
+  const cfg = new URL(location.href).searchParams.get("cfg");
+  if (cfg && applyCfg(cfg)) importedFromLink = true;
+} catch (e) { /* 忽略 */ }
 
 /* ---------- 工具 ---------- */
 function minutesOfDay(d){ return d.getHours()*60 + d.getMinutes(); }
@@ -682,6 +707,15 @@ function renderSheet(){
       : `当前区间：${fmtClock(S.startMin)} 至 ${fmtClock(S.endMin)}，开始时间在该范围内即使用夜间默认时长。`;
 }
 $("swNight").onclick = () => { S.nightEnabled = !S.nightEnabled; save(); $("swNight").classList.toggle("on", S.nightEnabled); renderSheet(); render(); };
+$("btnCopyCfg").onclick = () => {
+  const link = location.origin + location.pathname + "?cfg=" + encodeCfg();
+  const fallback = () => { $("cfgLink").textContent = link; toast("已生成链接，可长按复制"); };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(link).then(() => toast("配置链接已复制：在另一入口打开即可迁移"), fallback);
+  } else {
+    fallback();
+  }
+};
 $("btnResetDur").onclick = () => { customDur = null; render(); };
 
 /* ---------- 倒计时运行 ---------- */
@@ -880,10 +914,19 @@ if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0){
 }
 // iOS 会冻结后台定时器：回到前台立即按“结束时刻”重算，避免显示滞后
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) return;
+  if (document.hidden){ save(); return; }   // 切走时补一次保存
   refreshRealTime();
   if (T) tick();
 });
+// 页面被系统回收前再存一次，防止 iOS 直接杀死页面导致设置丢失
+window.addEventListener("pagehide", save);
+
+// 启动提示：确认设置是否从本机读取成功
+setTimeout(() => {
+  if (importedFromLink) toast("已导入配置链接并保存到本机");
+  else if (localStorage.getItem(KEY)) toast("已载入本机设置 · 夜间 " + fmtClock(S.startMin) + "→" + fmtClock(S.endMin));
+  else toast("首次使用 · 当前为默认设置");
+}, 500);
 </script>
 </body>
 </html>
