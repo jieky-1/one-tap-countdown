@@ -1,0 +1,70 @@
+name: iOS Simulator Run
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Pick an available iPhone simulator
+        id: sim
+        run: |
+          DEVICE=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | .value[] | select(.name | test("^iPhone")) ] | sort_by(.name) | last | .name')
+          echo "device=$DEVICE" >> "$GITHUB_OUTPUT"
+          echo "picked: $DEVICE"
+
+      - name: Build for simulator
+        run: |
+          xcodebuild \
+            -project OneTapCountdown.xcodeproj \
+            -target CountdownClock \
+            -sdk iphonesimulator \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
+            -configuration Debug \
+            -derivedDataPath DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Boot simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j \
+            | jq -r --arg n "${{ steps.sim.outputs.device }}" '[.devices | to_entries[] | .value[] | select(.name==$n)][0].udid')
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          echo "udid=$UDID"
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: Install & launch app
+        run: |
+          APP="$GITHUB_WORKSPACE/DerivedData/Build/Products/Debug-iphonesimulator/CountdownClock.app"
+          ls -d "$APP"
+          xcrun simctl install "$UDID" "$APP"
+          xcrun simctl launch "$UDID" com.example.OneTapCountdown
+          sleep 8
+
+      - name: Take screenshot
+        run: |
+          mkdir -p shots
+          xcrun simctl io "$UDID" screenshot shots/main.png
+          ls -l shots
+
+      - name: Push screenshot to ci-artifacts branch
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@example.com"
+          git checkout -B ci-artifacts
+          cp shots/main.png app-screenshot.png
+          git add app-screenshot.png
+          git commit -m "simulator screenshot for run $GITHUB_RUN_ID"
+          git push -f origin ci-artifacts
