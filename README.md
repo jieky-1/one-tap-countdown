@@ -31,6 +31,19 @@ CountdownClock/
     └── CountdownRunningView.swift    # 倒计时运行页（进度环 / 暂停 / 到点提示）
 ```
 
+## 免安装使用：PWA 网页版（推荐先试这个）
+
+仓库 `docs/` 目录就是一个可直接运行的 PWA（由 `preview/` 同步而来）：
+
+1. GitHub 仓库 → **Settings → Pages** → Build and deployment → Source 选 **Deploy from a branch** → Branch `main`、Folder **`/docs`** → Save
+2. 等 1–2 分钟，手机 Safari 打开：
+   `https://jieky-1.github.io/one-tap-countdown/`
+3. Safari 底部分享 → **添加到主屏幕** → 桌面出现「一键倒计时」图标，点开**全屏运行**，和原生 App 几乎一样，且**离线可用**（Service Worker 缓存）
+
+更新页面：`python tools/make_icon.py`（图标） + `powershell -File tools/publish-pwa.ps1`（同步 `preview/` → `docs/`）→ commit & push。
+
+> iOS 限制：Safari 不支持震动 API（只有声音），且后台/锁屏时 JS 定时器会被冻结 —— 已通过「按结束时刻绝对时间重算 + 回到前台立即刷新」规避，倒计时仍然准确。
+
 ## 在 Xcode 中运行（需 macOS + Xcode 15+，iOS 16+）
 
 工程已经配好，直接打开即可：
