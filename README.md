@@ -1,5 +1,7 @@
 # 一键倒计时（iOS App）
 
+![iOS Build Check](https://github.com/jieky-1/one-tap-countdown/actions/workflows/ios-build.yml/badge.svg)
+
 SwiftUI 实现的 iOS 倒计时 App：中间是「倒计时开始」时间输入（**键盘直接输入** + **滑轮调整**两种），左上角「夜间区间」设置，按开始时间是否落在夜间区间自动选择不同的默认倒计时时长，并正确处理跨日。
 
 ## 功能对照
