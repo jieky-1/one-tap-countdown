@@ -57,18 +57,8 @@ jobs:
         run: |
           set +e
           mkdir -p shots
-          NOW=$(date +%s)
-          fmt() { date -r "$1" +%H:%M; }
-          S_DAY=$(fmt $((NOW+1800)))     # now + 30min（日间）
-          S_M1=$(fmt $((NOW-60)))        # now - 1min
-          S_M90=$(fmt $((NOW-90)))       # now - 90s
-          S_M30=$(fmt $((NOW-1800)))     # now - 30min
-          # 跨日结束时刻用例：开始 23:30（昨天），时长使结束时刻 ≈ now + 2h
-          TODAY0=$(date -j -f "%Y-%m-%d %H:%M:%S" "$(date +%Y-%m-%d) 00:00:00" +%s)
-          Y2330=$((TODAY0 - 1800))
-          DUR2B=$(( (NOW + 7200 - Y2330) / 60 ))
 
-          shoot() {
+          run_case() {
             name=$1; wait=$2; shift 2
             xcrun simctl terminate booted com.example.OneTapCountdown >/dev/null 2>&1
             sleep 1
@@ -78,19 +68,50 @@ jobs:
             echo "shot: $name  args: $*"
           }
 
-          echo "S_DAY=$S_DAY S_M1=$S_M1 S_M90=$S_M90 S_M30=$S_M30 DUR2B=$DUR2B"
+          # 预热：首次冷启动较慢，先起一次再杀掉
+          ( xcrun simctl launch booted com.example.OneTapCountdown >/dev/null 2>&1 & )
+          sleep 10
+          xcrun simctl terminate booted com.example.OneTapCountdown
 
-          shoot 01-main-day          4  -start "$S_DAY"
-          shoot 02-main-night        4  -start 02:30
-          shoot 02b-crossday         4  -start 23:30 -duration "$DUR2B"
-          shoot 03-input-mode        6  -start "$S_DAY" -inputmode keyboard
-          shoot 04a-settings-interval 5 -sheet night
-          shoot 04b-settings-duration  5 -sheet duration
-          shoot 04c-settings-off     5  -sheet night -nightoff
-          shoot 05-overtime          4  -start "$S_M30" -duration 5
-          shoot 06-running           5  -start "$S_M1" -duration 2 -autostart
-          shoot 07-finished          50 -start "$S_M90" -duration 2 -autostart
-          shoot 08-custom-duration   4  -start "$S_DAY" -duration 90
+          # T1 主界面-日间（开始 = now+30min，结束 = now+1h）
+          NOW=$(date +%s)
+          run_case 01-main-day 6 -start "$(date -r $((NOW+1800)) +%H:%M)"
+
+          # T2 主界面-夜间（02:30 在默认夜间区间内，默认 8 小时）
+          run_case 02-main-night 6 -start 02:30
+
+          # T2b 跨日结束时刻（开始 23:30=昨天，时长使结束 ≈ now+2h）
+          TODAY0=$(date -j -f "%Y-%m-%d %H:%M:%S" "$(date +%Y-%m-%d) 00:00:00" +%s)
+          NOW=$(date +%s)
+          DUR2B=$(( (NOW + 7200 - (TODAY0 - 1800)) / 60 ))
+          run_case 02b-crossday 6 -start 23:30 -duration "$DUR2B"
+
+          # T3 输入模式
+          NOW=$(date +%s)
+          run_case 03-input-mode 8 -start "$(date -r $((NOW+1800)) +%H:%M)" -inputmode keyboard
+
+          # T4a/T4b 设置页（关闭开关的用例放最后，避免污染后续用例）
+          run_case 04a-settings-interval 6 -sheet night
+          run_case 04b-settings-duration 6 -sheet duration
+
+          # T5 已超时（开始 = now-30min，时长 5min）
+          NOW=$(date +%s)
+          run_case 05-overtime 6 -start "$(date -r $((NOW-1800)) +%H:%M)" -duration 5
+
+          # T6 倒计时运行（结束 ≈ now+60s）
+          NOW=$(date +%s)
+          run_case 06-running 6 -start "$(date -r $((NOW-60)) +%H:%M)" -duration 2 -autostart
+
+          # T7 到点算术题（结束 ≈ now+30s，等 50s 后已弹窗）
+          NOW=$(date +%s)
+          run_case 07-finished 50 -start "$(date -r $((NOW-90)) +%H:%M)" -duration 2 -autostart
+
+          # T8 手动时长 1.5 小时
+          NOW=$(date +%s)
+          run_case 08-custom-duration 6 -start "$(date -r $((NOW+1800)) +%H:%M)" -duration 90
+
+          # T4c 设置页-关闭态（放最后）
+          run_case 04c-settings-off 6 -sheet night -nightoff
           ls -l shots
 
       - name: Publish artifacts to ci-artifacts branch
