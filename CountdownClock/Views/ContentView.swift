@@ -19,11 +19,20 @@ struct ContentView: View {
     @State private var now = Date()
     /// 调试用：由启动参数 -autostart 触发直接进入倒计时页（仅 CI/模拟器演示，正常启动不带参数无影响）
     @State private var autoStart = false
+    /// 调试用：“倒计时开始”的输入方式（wheel / keyboard）
+    @State private var startInputMode: TimeInputView.InputMode = .wheel
+    /// 调试用：-sheet night|duration 启动后直接打开夜间区间设置页（duration 会滚动到默认时长区）
+    @State private var debugSheet: String?
+    /// 调试用：-nightoff 关闭“启用夜间区间”开关
+    @State private var debugNightOff = false
 
-    /// 支持启动参数（仅用于模拟器/CI 演示）：
-    ///   -start HH:mm   指定“倒计时开始”
-    ///   -duration <分钟> 指定倒计时时长
-    ///   -autostart     启动后直接进入倒计时页面
+    /// 支持启动参数（仅用于模拟器/CI 演示，正常启动不带参数完全无影响）：
+    ///   -start HH:mm        指定“倒计时开始”
+    ///   -duration <分钟>    指定倒计时时长
+    ///   -autostart          启动后直接进入倒计时页面
+    ///   -inputmode keyboard 启动后“倒计时开始”直接用键盘输入模式
+    ///   -sheet night|duration 启动后直接弹出夜间区间设置页
+    ///   -nightoff           启动后关闭“启用夜间区间”
     init() {
         let args = ProcessInfo.processInfo.arguments
         func value(_ key: String) -> String? {
@@ -43,6 +52,13 @@ struct ContentView: View {
             _customDuration = State(initialValue: minutes * 60)
         }
         _autoStart = State(initialValue: args.contains("-autostart"))
+        if let mode = value("-inputmode"), mode == "keyboard" {
+            _startInputMode = State(initialValue: .keyboard)
+        }
+        if let sheet = value("-sheet"), sheet == "night" || sheet == "duration" {
+            _debugSheet = State(initialValue: sheet)
+        }
+        _debugNightOff = State(initialValue: args.contains("-nightoff"))
     }
 
     private var startMinutes: Int { TimeUtils.minutesOfDay(startTime) }
@@ -77,13 +93,15 @@ struct ContentView: View {
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { now = $0 }
         .sheet(isPresented: $showNightSettings) {
-            NightIntervalSettingsView(settings: settings)
+            NightIntervalSettingsView(settings: settings, scrollTo: debugSheet == "duration" ? "duration" : nil)
         }
         .onAppear {
             if !didEditStartTime {
                 startTime = Date()
                 syncedMinutes = TimeUtils.minutesOfDay(startTime)
             }
+            if debugNightOff { settings.night.isEnabled = false }
+            if debugSheet != nil { showNightSettings = true }
             if autoStart { startFromLaunchArguments() }
         }
         .onChange(of: TimeUtils.minutesOfDay(startTime)) { minutes in
@@ -153,7 +171,7 @@ struct ContentView: View {
                 .font(.subheadline)
             }
 
-            TimeInputView(date: $startTime)
+            TimeInputView(date: $startTime, mode: $startInputMode)
 
             Text(intervalDescription)
                 .font(.footnote)

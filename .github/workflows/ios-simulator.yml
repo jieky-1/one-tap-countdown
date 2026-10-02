@@ -4,27 +4,6 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
-    inputs:
-      start_time:
-        description: '倒计时开始(HH:mm)，留空=当前时间。例：08:00'
-        required: false
-        default: ''
-      duration_min:
-        description: '倒计时时长(分钟)，留空=按默认。例：10'
-        required: false
-        default: ''
-      auto_start:
-        description: '启动后直接进入倒计时页面'
-        type: boolean
-        default: false
-      wait1:
-        description: '第 1 张截图：启动后等待秒数'
-        required: false
-        default: '4'
-      wait2:
-        description: '第 2 张截图：启动后等待秒数'
-        required: false
-        default: '45'
 
 jobs:
   run:
@@ -74,32 +53,45 @@ jobs:
           echo "app: $APP"
           xcrun simctl install booted "$APP"
 
-      - name: Launch app
+      - name: Run UI test cases
         run: |
           set +e
-          ARGS=""
-          if [ -n "${{ inputs.start_time }}" ]; then ARGS="$ARGS -start ${{ inputs.start_time }}"; fi
-          if [ -n "${{ inputs.duration_min }}" ]; then ARGS="$ARGS -duration ${{ inputs.duration_min }}"; fi
-          if [ "${{ inputs.auto_start }}" = "true" ]; then ARGS="$ARGS -autostart"; fi
-          echo "launch args:$ARGS"
-          # 后台启动，避免 simctl launch 阻塞；60 秒兜底超时
-          ( xcrun simctl launch booted com.example.OneTapCountdown $ARGS > launch.log 2>&1 & echo $! > launch.pid )
-          for i in $(seq 1 60); do
-            if [ -s launch.log ]; then break; fi
-            sleep 1
-          done
-          echo "--- launch.log ---"; cat launch.log; echo "------------------"
-
-      - name: Screenshot 1
-        run: |
-          sleep "${{ inputs.wait1 || '4' }}"
           mkdir -p shots
-          xcrun simctl io booted screenshot shots/shot1.png
+          NOW=$(date +%s)
+          fmt() { date -r "$1" +%H:%M; }
+          S_DAY=$(fmt $((NOW+1800)))     # now + 30min（日间）
+          S_M1=$(fmt $((NOW-60)))        # now - 1min
+          S_M90=$(fmt $((NOW-90)))       # now - 90s
+          S_M30=$(fmt $((NOW-1800)))     # now - 30min
+          # 跨日结束时刻用例：开始 23:30（昨天），时长使结束时刻 ≈ now + 2h
+          TODAY0=$(date -j -f "%Y-%m-%d %H:%M:%S" "$(date +%Y-%m-%d) 00:00:00" +%s)
+          Y2330=$((TODAY0 - 1800))
+          DUR2B=$(( (NOW + 7200 - Y2330) / 60 ))
 
-      - name: Screenshot 2
-        run: |
-          sleep "${{ inputs.wait2 || '45' }}"
-          xcrun simctl io booted screenshot shots/shot2.png
+          shoot() {
+            name=$1; wait=$2; shift 2
+            xcrun simctl terminate booted com.example.OneTapCountdown >/dev/null 2>&1
+            sleep 1
+            ( xcrun simctl launch booted com.example.OneTapCountdown "$@" >/dev/null 2>&1 & )
+            sleep "$wait"
+            xcrun simctl io booted screenshot "shots/$name.png"
+            echo "shot: $name  args: $*"
+          }
+
+          echo "S_DAY=$S_DAY S_M1=$S_M1 S_M90=$S_M90 S_M30=$S_M30 DUR2B=$DUR2B"
+
+          shoot 01-main-day          4  -start "$S_DAY"
+          shoot 02-main-night        4  -start 02:30
+          shoot 02b-crossday         4  -start 23:30 -duration "$DUR2B"
+          shoot 03-input-mode        6  -start "$S_DAY" -inputmode keyboard
+          shoot 04a-settings-interval 5 -sheet night
+          shoot 04b-settings-duration  5 -sheet duration
+          shoot 04c-settings-off     5  -sheet night -nightoff
+          shoot 05-overtime          4  -start "$S_M30" -duration 5
+          shoot 06-running           5  -start "$S_M1" -duration 2 -autostart
+          shoot 07-finished          50 -start "$S_M90" -duration 2 -autostart
+          shoot 08-custom-duration   4  -start "$S_DAY" -duration 90
+          ls -l shots
 
       - name: Publish artifacts to ci-artifacts branch
         if: always()
@@ -108,9 +100,8 @@ jobs:
           git config user.email "ci-bot@example.com"
           git checkout -B ci-artifacts
           mkdir -p out
-          [ -f shots/shot1.png ] && cp shots/shot1.png out/shot1.png
-          [ -f shots/shot2.png ] && cp shots/shot2.png out/shot2.png
+          cp shots/*.png out/ 2>/dev/null || true
           [ -f build.log ] && cp build.log out/build.log
           git add -A out
-          git commit -m "simulator run $GITHUB_RUN_ID" || echo "nothing to commit"
+          git commit -m "UI test shots run $GITHUB_RUN_ID" || echo "nothing to commit"
           git push -f origin ci-artifacts

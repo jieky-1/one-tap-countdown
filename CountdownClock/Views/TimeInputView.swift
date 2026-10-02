@@ -45,7 +45,17 @@ struct TimeOfDayWheel: View {
 /// “倒计时开始”时间输入：支持直接输入（键盘）与滑轮调整两种方式
 struct TimeInputView: View {
     @Binding var date: Date
+    /// 输入方式（可由外部传入，便于调试/演示直接定位到某个模式）
+    @Binding var mode: InputMode
     var onCommit: (() -> Void)? = nil
+
+    init(date: Binding<Date>,
+         mode: Binding<InputMode> = .constant(.wheel),
+         onCommit: (() -> Void)? = nil) {
+        _date = date
+        _mode = mode
+        self.onCommit = onCommit
+    }
 
     enum InputMode: String, CaseIterable, Identifiable {
         case wheel = "滑轮"
@@ -59,7 +69,6 @@ struct TimeInputView: View {
         }
     }
 
-    @State private var mode: InputMode = .wheel
     @State private var text: String = ""
     @State private var errorMessage: String?
     @FocusState private var isFocused: Bool

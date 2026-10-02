@@ -3,16 +3,27 @@ import SwiftUI
 /// 夜间区间设置：区间起止时间 + 夜间/非夜间两套默认倒计时时长
 struct NightIntervalSettingsView: View {
     @ObservedObject var settings: AppSettings
+    /// 调试用：打开后自动滚动到指定区域（"duration" = 默认倒计时时长）
+    var scrollTo: String? = nil
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 18) {
-                    intervalSection
-                    durationSection
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 18) {
+                        intervalSection
+                        durationSection
+                            .id("duration")
+                    }
+                    .padding(18)
                 }
-                .padding(18)
+                .onAppear {
+                    guard let target = scrollTo else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        withAnimation { proxy.scrollTo(target, anchor: .top) }
+                    }
+                }
             }
             .navigationTitle("夜间区间设置")
             .navigationBarTitleDisplayMode(.inline)
