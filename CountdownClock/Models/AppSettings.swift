@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIKit
 
 /// 夜间区间 + 两套默认倒计时时长
 struct NightInterval: Codable, Equatable {

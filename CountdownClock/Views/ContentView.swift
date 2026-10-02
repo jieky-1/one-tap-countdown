@@ -1,4 +1,6 @@
+import Combine
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @StateObject private var settings = AppSettings()

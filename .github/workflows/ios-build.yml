@@ -20,6 +20,7 @@ jobs:
 
       - name: Build (iOS Simulator)
         run: |
+          set -o pipefail
           xcodebuild \
             -project OneTapCountdown.xcodeproj \
             -target CountdownClock \
@@ -27,4 +28,14 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
-            build
+            build 2>&1 | tee build.log
+
+      - name: Export errors to job summary
+        if: failure()
+        run: |
+          {
+            echo '### xcodebuild 报错摘要'
+            echo '```'
+            grep -E "error:|xcodebuild: error|BUILD FAILED|The following build commands failed" build.log | head -80
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
