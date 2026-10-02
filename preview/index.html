@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>一键倒计时 · 预览原型</title>
+<style>
+  :root{
+    --bg:#0b0c10; --card:rgba(28,28,32,.86); --fg:#fff; --sub:#9a9aa2;
+    --accent:#5e7bff; --night:#6a5cff; --day:#ff9f43; --line:rgba(255,255,255,.08);
+    --item:40px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    margin:0;background:#15161a;color:#fff;
+    font:15px/1.45 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:16px;
+  }
+  .phone{
+    position:relative;width:390px;height:844px;max-height:96vh;flex:0 0 auto;
+    background:var(--bg);border-radius:44px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 10px #23252b;
+  }
+  .screen{position:absolute;inset:0;overflow-y:auto;padding:18px 18px 30px;scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+  .appbg{position:absolute;inset:0;background:linear-gradient(180deg,#0b0c10 0%,var(--tint,#2b3168) 100%);transition:background .4s}
+  .content{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px}
+
+  .topbar{display:flex;align-items:center;gap:10px}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;color:var(--fg);
+    background:rgba(255,255,255,.10);backdrop-filter:blur(12px);
+    padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;
+  }
+  .pill:active{transform:scale(.97)}
+  .status{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:600}
+
+  .card{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;padding:16px}
+  .rowhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .title{font-size:16px;font-weight:700}
+  .linkbtn{background:none;border:0;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer}
+  .hint{font-size:12px;color:var(--sub);line-height:1.5}
+
+  .seg{display:flex;gap:2px;background:rgba(255,255,255,.08);border-radius:10px;padding:2px;width:180px;margin:0 auto 8px}
+  .seg button{flex:1;border:0;background:none;color:var(--sub);font-size:13px;padding:6px 0;border-radius:8px;cursor:pointer}
+  .seg button.on{background:rgba(255,255,255,.16);color:#fff;font-weight:600}
+
+  .wheels{display:flex;justify-content:center;gap:6px;position:relative}
+  .wheelwrap{display:flex;align-items:center;gap:2px}
+  .wheel{
+    height:120px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;position:relative;width:70px;
+  }
+  .wheel::-webkit-scrollbar{display:none}
+  .wheel .pad{height:40px}
+  .wheel .it{
+    height:var(--item);display:flex;align-items:center;justify-content:center;
+    scroll-snap-align:center;font-size:22px;font-variant-numeric:tabular-nums;
+    color:var(--sub);transition:color .15s,transform .15s;cursor:pointer;
+    user-select:none;-webkit-user-select:none;
+  }
+  .wheel .it.sel{color:#fff;font-weight:700;transform:scale(1.12)}
+  .unit{font-size:12px;color:var(--sub)}
+  .band{
+    position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:var(--item);
+    border-radius:10px;background:rgba(255,255,255,.07);pointer-events:none;
+  }
+  .wheels::before,.wheels::after{
+    content:"";position:absolute;left:0;right:0;height:34px;pointer-events:none;z-index:2;
+  }
+  .wheels::before{top:0;background:linear-gradient(180deg,rgba(20,20,24,.95),transparent)}
+  .wheels::after{bottom:0;background:linear-gradient(0deg,rgba(20,20,24,.95),transparent)}
+
+  input.tinput{
+    width:150px;text-align:center;font-size:38px;font-weight:800;font-variant-numeric:tabular-nums;
+    background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:12px;
+    color:#fff;padding:10px;outline:none;
+  }
+  input.tinput:focus{border-color:var(--accent)}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 2px 0}
+  .keypad button{
+    border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;
+    border-radius:12px;padding:12px 0;font-size:19px;font-weight:600;cursor:pointer;
+  }
+  .keypad button:active{background:rgba(255,255,255,.20)}
+  #toast{
+    position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(12px);
+    background:rgba(0,0,0,.82);color:#fff;padding:10px 18px;border-radius:999px;
+    font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:50;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .keypad button.act{font-size:14px;background:rgba(94,123,255,.20);border-color:rgba(94,123,255,.4)}
+  .err{color:#ff6b6b;font-size:12px;min-height:16px}
+
+  .bigtime{font-size:40px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+  .overtime{
+    display:flex;align-items:center;gap:8px;margin-top:10px;
+    background:rgba(255,107,107,.16);border:1px solid rgba(255,107,107,.4);color:#ff9b9b;
+    border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap}
+  .chip:active{background:rgba(255,255,255,.16)}
+
+  .start{
+    width:100%;border:0;border-radius:16px;padding:16px;font-size:17px;font-weight:700;color:#fff;
+    background:linear-gradient(135deg,var(--accent),#8a6bff);cursor:pointer;
+  }
+  .start:disabled{opacity:.45;cursor:not-allowed}
+
+  /* 运行页 */
+  .run{position:absolute;inset:0;display:none;flex-direction:column;padding:24px;z-index:5;background:linear-gradient(180deg,#0b0c10,var(--tint,#2b3168))}
+  .run.show{display:flex}
+  .ring{position:relative;width:270px;height:270px;margin:auto}
+  .ring svg{transform:rotate(-90deg)}
+  .ringtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  .runbtns{display:flex;gap:14px;justify-content:center;margin-top:12px}
+  .rbtn{border:1px solid var(--line);background:rgba(255,255,255,.10);color:#fff;border-radius:14px;padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer}
+  .rbtn.primary{background:linear-gradient(135deg,#ff6b6b,#ff8f6b);border:0}
+  .finish{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:9}
+  .finish.show{display:flex}
+  .finbox{background:rgba(40,40,46,.96);border-radius:26px;padding:30px;text-align:center;width:250px}
+  .finbox .ic{font-size:46px}
+  .mathq{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;margin:14px 0 4px;letter-spacing:1px}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+  .shake{animation:shake .3s}
+
+  /* 设置页 */
+  .sheet{position:absolute;inset:0;background:rgba(10,10,12,.6);display:none;z-index:8;align-items:flex-end}
+  .sheet.show{display:flex}
+  .sheetbox{width:100%;height:88%;background:#121317;border-radius:26px 26px 0 0;display:flex;flex-direction:column}
+  .sheethead{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+  .sheetbody{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px}
+  .sw{width:46px;height:28px;border-radius:999px;background:rgba(255,255,255,.18);position:relative;cursor:pointer;transition:background .2s;border:0}
+  .sw.on{background:#34c759}
+  .sw i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
+  .sw.on i{left:21px}
+  .sub{font-size:13px;color:var(--sub);font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+  .tip{background:rgba(94,123,255,.12);border:1px solid rgba(94,123,255,.3);border-radius:12px;padding:10px;font-size:12px;color:#cfd6ff}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="appbg" id="appbg"></div>
+
+  <!-- 主界面 -->
+  <div class="screen" id="main">
+    <div class="content">
+      <div class="topbar">
+        <button class="pill" id="btnNight">🌙 夜间区间</button>
+        <span class="status" id="statusPill">☀️ 日间</span>
+      </div>
+
+      <div class="card">
+        <div class="rowhead">
+          <span class="title">倒计时开始</span>
+          <button class="linkbtn" id="btnNow">设为现在</button>
+        </div>
+        <div class="seg" id="segStart">
+          <button data-mode="wheel" class="on">滑轮</button>
+          <button data-mode="input">输入</button>
+        </div>
+        <div id="startWheelBox">
+          <div class="wheels" id="startWheels"></div>
+        </div>
+        <div id="startInputBox" style="display:none;text-align:center">
+          <input class="tinput" id="startInput" inputmode="numeric" placeholder="HH:mm" />
+          <button class="linkbtn" id="btnCommit" style="margin-left:8px">确定</button>
+          <div class="err" id="startErr"></div>
+          <div class="hint">支持 730 / 07:30 / 7:30 写法</div>
+          <div class="keypad" id="keypad"></div>
+        </div>
+        <div class="hint" id="intervalHint" style="margin-top:8px"></div>
+      </div>
+
+      <div class="card">
+        <div class="rowhead">
+          <span class="title">倒计时时长</span>
+          <button class="linkbtn" id="btnResetDur" style="display:none">恢复默认</button>
+        </div>
+        <div class="bigtime" id="durText">30:00</div>
+        <div class="hint" id="durTag" style="margin:2px 0 8px"></div>
+        <div class="overtime" id="overtime" style="display:none"></div>
+        <div class="wheels" id="durWheels"></div>
+        <div class="chips" id="durChips" style="margin-top:10px"></div>
+        <div class="hint" id="endHint" style="margin-top:8px"></div>
+      </div>
+
+      <button class="start" id="btnStart">▶ 开始倒计时</button>
+      <div class="hint" style="text-align:center">浏览器原型：逻辑与 SwiftUI 版本一致，用于验证交互</div>
+    </div>
+  </div>
+
+  <!-- 运行页 -->
+  <div class="run" id="run">
+    <div style="display:flex"><button class="pill" id="btnClose" style="margin-left:auto">关闭</button></div>
+    <div class="ring">
+      <svg width="270" height="270">
+        <circle cx="135" cy="135" r="121" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="16"/>
+        <circle id="ringFg" cx="135" cy="135" r="121" fill="none" stroke="url(#g1)" stroke-width="16"
+                stroke-linecap="round" stroke-dasharray="760" stroke-dashoffset="760"/>
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#5e7bff"/><stop offset="1" stop-color="#8a6bff"/>
+        </linearGradient></defs>
+      </svg>
+      <div class="ringtxt">
+        <div class="bigtime" id="runTime" style="font-size:46px">00:00</div>
+        <div class="hint" id="runKind"></div>
+        <div class="hint" id="runEnd"></div>
+      </div>
+    </div>
+    <div class="hint" id="runStart" style="text-align:center"></div>
+    <div class="runbtns">
+      <button class="rbtn" id="btnPause">暂停</button>
+      <button class="rbtn primary" id="btnStop">结束</button>
+    </div>
+    <div style="height:40px"></div>
+  </div>
+
+  <!-- 结束浮层 -->
+  <div class="finish" id="finish">
+    <div class="finbox">
+      <div class="ic">🔔</div>
+      <h2 style="margin:10px 0 4px">时间到</h2>
+      <div class="hint" id="finText"></div>
+      <div class="mathq" id="finMath"></div>
+      <input class="tinput" id="finAns" inputmode="numeric" placeholder="答案" style="width:140px;font-size:28px;margin-top:6px" />
+      <div class="keypad" id="finKeypad"></div>
+      <div class="err" id="finErr"></div>
+      <div class="hint">答对后自动返回主界面</div>
+    </div>
+  </div>
+
+  <!-- 夜间区间设置 -->
+  <div class="sheet" id="sheet">
+    <div class="sheetbox">
+      <div class="sheethead">
+        <span style="font-weight:700">夜间区间设置</span>
+        <button class="linkbtn" id="btnDone">完成</button>
+      </div>
+      <div class="sheetbody">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="title">启用夜间区间</span>
+            <button class="sw on" id="swNight"><i></i></button>
+          </div>
+          <div style="height:14px"></div>
+          <div class="sub">开始时间</div>
+          <div class="wheels" id="nightStartWheels"></div>
+          <div style="height:10px"></div>
+          <div class="sub">结束时间</div>
+          <div class="wheels" id="nightEndWheels"></div>
+          <div style="height:10px"></div>
+          <div class="tip" id="nightTip"></div>
+        </div>
+        <div class="card">
+          <div class="title" style="margin-bottom:10px">默认倒计时时长</div>
+          <div class="sub">🌙 夜间区间内 · <span id="nightDurText"></span></div>
+          <div class="wheels" id="nightDurWheels"></div>
+          <div style="height:12px"></div>
+          <div class="sub">☀️ 非夜间区间 · <span id="dayDurText"></span></div>
+          <div class="wheels" id="dayDurWheels"></div>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- 状态 ---------- */
+const KEY = "oneTapCountdown.preview.v1";
+const DEF = { nightEnabled:true, startMin:23*60, endMin:7*60, nightDur:8*3600, dayDur:30*60 };
+let S = Object.assign({}, DEF, JSON.parse(localStorage.getItem(KEY) || "{}"));
+let startMinutes = minutesOfDay(new Date());
+let syncedMinutes = startMinutes;
+let startEdited = false;
+let customDur = null;
+let inputMode = "wheel";
+/// “倒计时开始”对应的绝对起点（今天该时刻）
+function startBaseMs(){
+  const d = new Date();
+  d.setHours(Math.floor(startMinutes/60), startMinutes%60, 0, 0);
+  return d.getTime();
+}
+/// 真实倒计时：结束时刻 = 倒计时开始 + 时长；真实剩余 = 结束时刻 - 当前时间。
+/// 开始时间只有“时刻”，取 昨天/今天/明天 三个候选中“结束时刻离现在最近”的那个，
+/// 这样跨日场景（23:00 起 8 小时 → 次日 07:00 结束）也能算对。
+function resolveEndInfo(){
+  const now = Date.now();
+  const durMs = duration() * 1000;
+  let best = null;
+  for (const off of [-1, 0, 1]){
+    const d = new Date();
+    d.setDate(d.getDate() + off);
+    d.setHours(Math.floor(startMinutes/60), startMinutes%60, 0, 0);
+    const startMs = d.getTime();
+    const endMs = startMs + durMs;
+    const diff = endMs - now;                       // 毫秒，负数表示已到
+    if (!best || Math.abs(diff) < Math.abs(best.diff)) best = { startMs, endMs, diff };
+  }
+  return best;
+}
+function toast(msg){
+  let el = $("toast");
+  if (!el){
+    el = document.createElement("div");
+    el.id = "toast";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 1800);
+}
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+
+/* ---------- 工具 ---------- */
+function minutesOfDay(d){ return d.getHours()*60 + d.getMinutes(); }
+const pad = n => String(n).padStart(2,"0");
+const fmtClock = m => pad(Math.floor(m/60)) + ":" + pad(m%60);
+function fmtClockDur(sec){
+  sec = Math.max(0, Math.ceil(sec));
+  const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60), s = sec%60;
+  return h>0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+}
+function fmtDurCN(sec){
+  sec = Math.max(0, Math.round(sec));
+  const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60), s = sec%60;
+  if (h>0) return m>0 ? `${h} 小时 ${m} 分` : `${h} 小时`;
+  if (m>0) return `${m} 分`;
+  return `${s} 秒`;
+}
+const crossesMidnight = () => S.startMin > S.endMin;
+const isAllDay = () => S.startMin === S.endMin;
+function inNight(m){
+  if (!S.nightEnabled) return false;
+  if (isAllDay()) return true;
+  return crossesMidnight() ? (m >= S.startMin || m < S.endMin) : (m >= S.startMin && m < S.endMin);
+}
+const autoDur = () => inNight(startMinutes) ? S.nightDur : S.dayDur;
+const duration = () => customDur == null ? autoDur() : customDur;
+function endText(startMs, durSec){
+  const end = new Date(startMs + durSec*1000);
+  const d0 = new Date(startMs); d0.setHours(0,0,0,0);
+  const d1 = new Date(end); d1.setHours(0,0,0,0);
+  const days = Math.round((d1 - d0)/86400000);
+  const t = pad(end.getHours())+":"+pad(end.getMinutes());
+  return days===0 ? `预计 ${t} 结束` : days===1 ? `预计次日 ${t} 结束` : `预计 ${days} 天后 ${t} 结束`;
+}
+function parseTime(text){
+  const d = (text.match(/\d/g) || []).join("");
+  let h, m;
+  if (d.length<=2){ h=+d; m=0; }
+  else if (d.length===3){ h=+d[0]; m=+d.slice(1); }
+  else if (d.length===4){ h=+d.slice(0,2); m=+d.slice(2); }
+  else return null;
+  if (!(h>=0&&h<24&&m>=0&&m<60)) return null;
+  return h*60+m;
+}
+
+/* ---------- 滑轮组件 ---------- */
+function makeWheel(box, count, value, onChange, fmt){
+  const wrap = document.createElement("div");
+  wrap.className = "wheelwrap";
+  const wheel = document.createElement("div");
+  wheel.className = "wheel";
+  const pad1 = document.createElement("div"); pad1.className="pad";
+  const pad2 = document.createElement("div"); pad2.className="pad";
+  wheel.appendChild(pad1);
+  const items = [];
+  for (let i=0;i<count;i++){
+    const it = document.createElement("div");
+    it.className = "it"; it.textContent = fmt ? fmt(i) : pad(i);
+    it.onclick = () => set(i, true);
+    wheel.appendChild(it); items.push(it);
+  }
+  wheel.appendChild(pad2);
+  const unitEl = document.createElement("span");
+  unitEl.className = "unit";
+  wrap.appendChild(wheel); wrap.appendChild(unitEl);
+  box.appendChild(wrap);
+  const idxOf = () => Math.min(count-1, Math.max(0, Math.round(wheel.scrollTop / 40)));
+  // 滚动即时生效（不再防抖，索引变化才回调）
+  wheel.addEventListener("scroll", () => {
+    const idx = idxOf();
+    if (idx !== wheel._idx){ wheel._idx = idx; paint(idx); onChange(idx); }
+  });
+  // 桌面端鼠标按住拖拽（鼠标拖 div 默认不会滚动）
+  let dragging = false, startY = 0, startTop = 0;
+  wheel.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse") return;
+    dragging = true; startY = e.clientY; startTop = wheel.scrollTop;
+    wheel.setPointerCapture(e.pointerId);
+  });
+  wheel.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    wheel.scrollTop = startTop - (e.clientY - startY);
+    e.preventDefault();
+  });
+  wheel.addEventListener("pointerup", () => { if (!dragging) return; dragging = false; set(idxOf(), true); });
+  wheel.addEventListener("pointercancel", () => { dragging = false; });
+  function paint(idx){ items.forEach((el,i)=>el.classList.toggle("sel", i===idx)); }
+  function set(i, smooth){
+    wheel._idx = i; paint(i);
+    wheel.scrollTo({ top: i*40, behavior: smooth ? "smooth" : "auto" });
+  }
+  wrap.setUnit = t => unitEl.textContent = t;
+  wrap.set = i => set(i, false);
+  wrap.value = () => wheel._idx;
+  /// 实时读取当前位置（直接读 scrollTop，不依赖滚动事件回调）
+  wrap.read = idxOf;
+  set(value, false);
+  return wrap;
+}
+function wheelsBox(el, specs){
+  el.innerHTML = "";
+  const band = document.createElement("div"); band.className="band"; el.appendChild(band);
+  const list = specs.map(s => {
+    const w = makeWheel(el, s.count, s.value, s.onChange, s.fmt);
+    w.setUnit(s.unit); return w;
+  });
+  return list;
+}
+
+/* ---------- 主界面渲染 ---------- */
+const $ = id => document.getElementById(id);
+let wStartH, wStartM, wDurH, wDurM, wDurS;
+
+function buildStartWheels(){
+  const [h,m] = wheelsBox($("startWheels"), [
+    { count:24, value:Math.floor(startMinutes/60), unit:"时", onChange:i => setStart(i*60 + startMinutes%60) },
+    { count:60, value:startMinutes%60, unit:"分", onChange:i => setStart(Math.floor(startMinutes/60)*60 + i) }
+  ]);
+  wStartH = h; wStartM = m;
+}
+function syncStartWheels(){
+  if (!wStartH) return;
+  wStartH.set(Math.floor(startMinutes/60));
+  wStartM.set(startMinutes%60);
+}
+function setStart(mins){
+  startMinutes = mins;
+  const cur = minutesOfDay(new Date());
+  startEdited = (mins !== syncedMinutes);
+  render();
+}
+function buildDurWheels(){
+  const d = Math.round(duration());
+  const [h,m,s] = wheelsBox($("durWheels"), [
+    { count:24, value:Math.floor(d/3600), unit:"时", onChange:i => setDur(i, Math.floor(duration()%3600/60), Math.round(duration())%60) },
+    { count:60, value:Math.floor(d%3600/60), unit:"分", onChange:i => setDur(Math.floor(duration()/3600), i, Math.round(duration())%60) },
+    { count:60, value:d%60, unit:"秒", onChange:i => setDur(Math.floor(duration()/3600), Math.floor(duration()%3600/60), i) }
+  ]);
+  wDurH=h; wDurM=m; wDurS=s;
+}
+function setDur(h,m,s){ customDur = h*3600 + m*60 + s; render(); }
+
+function render(){
+  const night = inNight(startMinutes);
+  document.documentElement.style.setProperty("--tint", night ? "#2a2470" : "#2b3168");
+  $("appbg").style.background = `linear-gradient(180deg,#0b0c10,${night ? "#2a2470" : "#2b3168"})`;
+  $("statusPill").textContent = night ? "🌙 夜间" : (S.nightEnabled ? "☀️ 日间" : "☀️ 日间");
+  $("statusPill").style.background = night ? "rgba(106,92,255,.22)" : "rgba(255,159,67,.2)";
+
+  // 开始时间滑轮：只在滑轮可见时同步（隐藏元素 scrollTo 无效，切回滑轮时再补同步）
+  if (wStartH && inputMode === "wheel") syncStartWheels();
+
+  const dur = duration();
+  $("durText").textContent = fmtClockDur(dur);
+  $("btnResetDur").style.display = customDur == null ? "none" : "block";
+  $("durTag").textContent = !S.nightEnabled
+    ? "夜间区间未启用 · 使用日间默认时长"
+    : (customDur == null
+        ? `${night ? "夜间" : "非夜间"}区间默认时长 · 自动匹配`
+        : `已手动调整（${night ? "夜间" : "非夜间"}默认 ${fmtDurCN(autoDur())}）`);
+  if (wDurH){
+    const d = Math.round(dur);
+    wDurH.set(Math.floor(d/3600)); wDurM.set(Math.floor(d%3600/60)); wDurS.set(d%60);
+  }
+  $("intervalHint").textContent = !S.nightEnabled
+    ? "夜间区间未启用，任何开始时间都使用日间默认时长。"
+    : `夜间区间 ${fmtClock(S.startMin)} → ${fmtClock(S.endMin)}${crossesMidnight() ? "（跨日）" : ""}，当前开始时间 ${fmtClock(startMinutes)} ${night ? "落在夜间区间内" : "不在夜间区间内"}。`;
+  refreshRealTime();
+  if (!$("sheet").classList.contains("show")) renderChips();
+}
+
+/// 按“（开始 + 时长） - 当前时间”刷新真实剩余；<= 0 表示倒计时已到
+function refreshRealTime(){
+  const info = resolveEndInfo();
+  const left = info.diff / 1000;
+  const endClock = pad(new Date(info.endMs).getHours()) + ":" + pad(new Date(info.endMs).getMinutes());
+  $("endHint").textContent = left > 0
+    ? `${endText(info.startMs, duration())} · 真实剩余 ${fmtClockDur(left)}`
+    : `倒计时已到：结束时刻 ${endClock}，已超时 ${fmtClockDur(-left)}`;
+  $("endHint").style.color = left > 0 ? "" : "#ff8f8f";
+  // 醒目的“已超时”横幅（超时时间 = 当前时间 - 结束时刻，每秒递增）
+  const over = $("overtime");
+  over.style.display = left > 0 ? "none" : "flex";
+  over.textContent = `⏰ 倒计时已到 · 已超时 ${fmtClockDur(-left)}`;
+  $("btnStart").disabled = left <= 0;
+  $("btnStart").textContent = left <= 0 ? "倒计时已到" : "▶ 开始倒计时";
+}
+function renderChips(){
+  const box = $("durChips"); box.innerHTML = "";
+  [[90,"1.5 小时"],[120,"2 小时"],[150,"2.5 小时"],[180,"3 小时"]].forEach(([min,label])=>{
+    const b = document.createElement("button");
+    b.className="chip"; b.textContent=label;
+    b.onclick = () => { customDur = min*60; render(); };
+    box.appendChild(b);
+  });
+}
+
+/* ---------- 交互：开始时间 ---------- */
+
+// 屏幕键盘：即使物理键盘无法聚焦输入框，也能点击输入
+(function buildKeypad(){
+  const keys = ["1","2","3","4","5","6","7","8","9",":","0","⌫"];
+  const box = $("keypad");
+  keys.forEach(k => {
+    const b = document.createElement("button");
+    b.textContent = k;
+    b.onclick = () => typeKey(k);
+    box.appendChild(b);
+  });
+  const clear = document.createElement("button");
+  clear.textContent = "清除"; clear.className = "act";
+  clear.onclick = () => { $("startInput").value = ""; $("startErr").textContent = ""; };
+  box.appendChild(clear);
+  const ok = document.createElement("button");
+  ok.textContent = "确定"; ok.className = "act"; ok.style.gridColumn = "span 2";
+  ok.onclick = commitInput;
+  box.appendChild(ok);
+})();
+
+function typeKey(k){
+  const el = $("startInput");
+  if (k === "⌫") el.value = el.value.slice(0, -1);
+  else if (el.value.length < 5) el.value += k;
+  $("startErr").textContent = "";
+  el.focus({ preventScroll: true });
+}
+
+// 物理键盘兜底：页面任意位置敲数字/冒号/退格/回车都写入输入框
+document.addEventListener("keydown", e => {
+  // 到点弹窗：物理键盘直接写答案（兜底，避免输入框没抢到焦点）
+  if ($("finish").classList.contains("show")){
+    const el = $("finAns");
+    if (/^[0-9]$/.test(e.key)){
+      if (el.value.length < 4) el.value += e.key;
+      el.dispatchEvent(new Event("input"));
+      e.preventDefault();
+    } else if (e.key === "Backspace"){
+      el.value = el.value.slice(0, -1);
+      el.dispatchEvent(new Event("input"));
+      e.preventDefault();
+    }
+    return;
+  }
+  if (inputMode !== "input") return;
+  if ($("run").classList.contains("show") || $("sheet").classList.contains("show")) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (/^[0-9:]$/.test(e.key)) { typeKey(e.key); e.preventDefault(); }
+  else if (e.key === "Backspace") { typeKey("⌫"); e.preventDefault(); }
+  else if (e.key === "Enter") { commitInput(); e.preventDefault(); }
+});
+
+$("segStart").onclick = e => {
+  const b = e.target.closest("button"); if (!b) return;
+  [...$("segStart").children].forEach(x => x.classList.toggle("on", x === b));
+  inputMode = b.dataset.mode;
+  const wheelMode = inputMode === "wheel";
+  $("startWheelBox").style.display = wheelMode ? "block" : "none";
+  $("startInputBox").style.display = wheelMode ? "none" : "block";
+  if (wheelMode){
+    syncStartWheels(); // 从输入切回滑轮时补同步（隐藏时无法滚动）
+  } else {
+    $("startInput").value = fmtClock(startMinutes);
+    $("startErr").textContent = "";
+    setTimeout(() => $("startInput").focus({ preventScroll: true }), 30);
+  }
+};
+$("startInput").addEventListener("click", () => $("startInput").focus({ preventScroll: true }));
+$("startInput").addEventListener("input", () => { $("startErr").textContent = ""; });
+function commitInput(){
+  const v = parseTime($("startInput").value);
+  if (v == null){ $("startErr").textContent = "时间格式不正确，请输入 0:00 - 23:59"; return; }
+  $("startErr").textContent = "";
+  $("startInput").value = fmtClock(v);
+  setStart(v);
+  toast(`已设为 ${fmtClock(v)} · ${inNight(v) ? "夜间" : "日间"}默认 ${fmtDurCN(autoDur())}`);
+}
+$("btnCommit").onclick = commitInput;
+$("startInput").addEventListener("keydown", e => { if (e.key === "Enter") commitInput(); });
+$("btnNow").onclick = () => {
+  startMinutes = minutesOfDay(new Date());
+  syncedMinutes = startMinutes; startEdited = false;
+  $("startInput").value = fmtClock(startMinutes);
+  render();
+};
+
+/* ---------- 交互：设置页 ---------- */
+// 先显示再构建滑轮：隐藏容器里 scrollTo 无效，会导致滑轮停在 00
+$("btnNight").onclick = () => {
+  $("sheet").classList.add("show");
+  requestAnimationFrame(() => buildSheet());
+};
+$("btnDone").onclick = () => {
+  commitSheet();
+  $("sheet").classList.remove("show");
+  toast(`已保存 · 夜间 ${fmtDurCN(S.nightDur)} / 日间 ${fmtDurCN(S.dayDur)} · 当前生效 ${fmtDurCN(autoDur())}`);
+  render();
+};
+$("sheet").onclick = e => {
+  if (e.target.id !== "sheet") return;
+  commitSheet();
+  $("sheet").classList.remove("show");
+  render();
+};
+
+let sheetWheels = {};
+function buildSheet(){
+  $("swNight").classList.toggle("on", S.nightEnabled);
+  sheetWheels.ns = wheelsBox($("nightStartWheels"), [
+    { count:24, value:Math.floor(S.startMin/60), unit:"时", onChange:i => { S.startMin = i*60 + S.startMin%60; save(); renderSheet(); render(); } },
+    { count:60, value:S.startMin%60, unit:"分", onChange:i => { S.startMin = Math.floor(S.startMin/60)*60 + i; save(); renderSheet(); render(); } }
+  ]);
+  sheetWheels.ne = wheelsBox($("nightEndWheels"), [
+    { count:24, value:Math.floor(S.endMin/60), unit:"时", onChange:i => { S.endMin = i*60 + S.endMin%60; save(); renderSheet(); render(); } },
+    { count:60, value:S.endMin%60, unit:"分", onChange:i => { S.endMin = Math.floor(S.endMin/60)*60 + i; save(); renderSheet(); render(); } }
+  ]);
+  sheetWheels.nd = wheelsBox($("nightDurWheels"), [
+    { count:24, value:Math.floor(S.nightDur/3600), unit:"时", onChange:i => { S.nightDur = i*3600 + S.nightDur%3600; applyDefaultChange(); } },
+    { count:60, value:Math.floor(S.nightDur%3600/60), unit:"分", onChange:i => { S.nightDur = Math.floor(S.nightDur/3600)*3600 + i*60 + S.nightDur%60; applyDefaultChange(); } },
+    { count:60, value:S.nightDur%60, unit:"秒", onChange:i => { S.nightDur = Math.floor(S.nightDur/60)*60 + i; applyDefaultChange(); } }
+  ]);
+  sheetWheels.dd = wheelsBox($("dayDurWheels"), [
+    { count:24, value:Math.floor(S.dayDur/3600), unit:"时", onChange:i => { S.dayDur = i*3600 + S.dayDur%3600; applyDefaultChange(); } },
+    { count:60, value:Math.floor(S.dayDur%3600/60), unit:"分", onChange:i => { S.dayDur = Math.floor(S.dayDur/3600)*3600 + i*60 + S.dayDur%60; applyDefaultChange(); } },
+    { count:60, value:S.dayDur%60, unit:"秒", onChange:i => { S.dayDur = Math.floor(S.dayDur/60)*60 + i; applyDefaultChange(); } }
+  ]);
+  renderSheet();
+}
+/// 关闭设置页时，直接按滑轮当前显示的位置落库（保证“保存值 = 显示值”）
+function commitSheet(){
+  const rd = a => a.map(w => w.read());
+  const [sh, sm] = rd(sheetWheels.ns); S.startMin = sh * 60 + sm;
+  const [eh, em] = rd(sheetWheels.ne); S.endMin  = eh * 60 + em;
+  const [nh, nm, nsec] = rd(sheetWheels.nd); S.nightDur = nh * 3600 + nm * 60 + nsec;
+  const [dh, dm, dsec] = rd(sheetWheels.dd); S.dayDur   = dh * 3600 + dm * 60 + dsec;
+  customDur = null;
+  save();
+  renderSheet();
+  render();
+}
+/// 修改默认时长：清空手动覆盖，让主界面立即按新默认值匹配
+function applyDefaultChange(){
+  customDur = null;
+  save();
+  renderSheet();
+  render();
+}
+function renderSheet(){
+  $("nightDurText").textContent = fmtDurCN(S.nightDur);
+  $("dayDurText").textContent = fmtDurCN(S.dayDur);
+  $("nightTip").textContent = !S.nightEnabled
+    ? "关闭后，所有时间都使用「非夜间区间」的默认时长。"
+    : isAllDay() ? "开始与结束时间相同，视为全天均为夜间区间。"
+    : crossesMidnight()
+      ? `当前为跨日区间：${fmtClock(S.startMin)} 至次日 ${fmtClock(S.endMin)}（${fmtClock(S.startMin)} 之后、次日 ${fmtClock(S.endMin)} 之前都属于夜间）。`
+      : `当前区间：${fmtClock(S.startMin)} 至 ${fmtClock(S.endMin)}，开始时间在该范围内即使用夜间默认时长。`;
+}
+$("swNight").onclick = () => { S.nightEnabled = !S.nightEnabled; save(); $("swNight").classList.toggle("on", S.nightEnabled); renderSheet(); render(); };
+$("btnResetDur").onclick = () => { customDur = null; render(); };
+
+/* ---------- 倒计时运行 ---------- */
+let T = null; // {total, remaining, endAt, running}
+const CIRC = 2 * Math.PI * 121;
+$("ringFg").setAttribute("stroke-dasharray", CIRC);
+function startCountdown(){
+  const info = resolveEndInfo();
+  const left = info.diff / 1000;                 // 真实倒计时时长
+  if (left <= 0){
+    refreshRealTime();
+    toast(`倒计时已到 · 已超时 ${fmtClockDur(-left)}`);
+    return;
+  }
+  ensureAudio();                                   // 提前解锁音频，保证到点能响
+  const total = left;
+  T = { total, remaining: total, endAt: Date.now() + total*1000, running: true, startMs: info.startMs, endMs: info.endMs, finished: false };
+  $("run").classList.add("show");
+  $("finish").classList.remove("show");
+  $("btnClose").disabled = false;
+  $("btnStop").disabled = false;
+  $("btnPause").disabled = false;
+  $("runKind").textContent = inNight(startMinutes) ? "夜间时长" : "日间时长";
+  $("runStart").textContent = "开始于 " + fmtClock(startMinutes);
+  $("btnPause").textContent = "暂停";
+  tick();
+  clearInterval(T._iv);
+  T._iv = setInterval(tick, 100);
+}
+function tick(){
+  if (!T) return;
+  if (T.running) T.remaining = Math.max(0, (T.endAt - Date.now())/1000);
+  const r = T.remaining;
+  $("runTime").textContent = fmtClockDur(r);
+  $("runEnd").textContent = endText(T.startMs, T.total); // 结束时刻 = 倒计时开始 + 时长
+  $("ringFg").setAttribute("stroke-dashoffset", CIRC * (1 - (T.total ? 1 - r/T.total : 0)));
+  if (r <= 0 && !T.finished){
+    T.finished = true;
+    finishCountdown();
+  }
+}
+$("btnStart").onclick = startCountdown;
+
+/* ---------- 到点：算术题 + 持续响铃 ---------- */
+let problem = null;                                  // {a, b, sum}
+const newProblem = () => {
+  const a = 10 + Math.floor(Math.random() * 90);
+  const b = 10 + Math.floor(Math.random() * 90);
+  return { a, b, sum: a + b };
+};
+const alarm = { ctx: null, timer: null, master: null };
+/// 提前在用户手势里解锁音频（浏览器不允许无手势自动播放）
+function ensureAudio(){
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  try{
+    if (!alarm.ctx){
+      alarm.ctx = new AC();
+      alarm.master = alarm.ctx.createGain();
+      alarm.master.gain.value = 1.0;          // 最大音量
+      alarm.master.connect(alarm.ctx.destination);
+    }
+    if (alarm.ctx.state === "suspended") alarm.ctx.resume();
+    return alarm.ctx;
+  } catch (e) { return null; }
+}
+function startAlarm(){
+  stopAlarm();
+  const ctx = ensureAudio();
+  if (ctx){
+    try{
+      // 三连响（880 / 1175 / 880 Hz 方波），音量拉满
+      const burst = () => {
+        const t0 = ctx.currentTime + 0.01;
+        [[0, 880], [0.2, 1175], [0.4, 880]].forEach(([off, freq]) => {
+          const t = t0 + off;
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = "square"; o.frequency.setValueAtTime(freq, t);
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(0.9, t + 0.01);
+          g.gain.setValueAtTime(0.9, t + 0.13);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.19);
+          o.connect(g); g.connect(alarm.master);
+          o.start(t); o.stop(t + 0.2);
+        });
+      };
+      // 手机震动：响一次震一次
+      const vibrate = () => { if (navigator.vibrate) navigator.vibrate([500, 150, 500, 150, 500]); };
+      burst(); vibrate();
+      alarm.timer = setInterval(() => { burst(); vibrate(); }, 1200);
+    } catch (e) { /* 降级：静默 */ }
+  } else if (navigator.vibrate){
+    alarm.timer = setInterval(() => navigator.vibrate([500, 150, 500]), 1200);
+  }
+}
+function stopAlarm(){
+  if (alarm.timer){ clearInterval(alarm.timer); alarm.timer = null; }
+  if (alarm.ctx){ try { alarm.ctx.close(); } catch (e) {} alarm.ctx = null; }
+}
+function finishCountdown(){
+  clearInterval(T._iv);
+  problem = newProblem();
+  $("finText").textContent = `倒计时 ${fmtDurCN(T.total)} 已完成`;
+  $("finMath").textContent = `${problem.a} + ${problem.b} = ?`;
+  $("finAns").value = "";
+  $("finErr").textContent = "";
+  $("finish").classList.add("show");
+  // 未答对前不允许关闭/暂停/结束
+  $("btnClose").disabled = true;
+  $("btnStop").disabled = true;
+  $("btnPause").disabled = true;
+  startAlarm();
+  setTimeout(() => $("finAns").focus({ preventScroll: true }), 60);
+}
+/// 答案正确 → 自动返回主界面；否则继续响
+$("finAns").addEventListener("input", () => {
+  if (!problem) return;
+  const val = $("finAns").value.trim();
+  const want = String(problem.sum);
+  if (val === want){
+    $("finErr").textContent = "";
+    stopAlarm();
+    toast("答对了 · 已返回主界面");
+    closeRun();
+    return;
+  }
+  if (val.length >= want.length){
+    $("finErr").textContent = "答案不对，再算一次";
+    const el = $("finAns");
+    el.classList.remove("shake");
+    void el.offsetWidth;
+    el.classList.add("shake");
+    if (navigator.vibrate) navigator.vibrate(120);
+  } else {
+    $("finErr").textContent = "";
+  }
+});
+$("btnPause").onclick = () => {
+  if (!T || T.remaining <= 0) return;
+  if (T.running){ T.running = false; clearInterval(T._iv); $("btnPause").textContent = "继续"; }
+  else { T.running = true; T.endAt = Date.now() + T.remaining*1000; $("btnPause").textContent = "暂停"; clearInterval(T._iv); T._iv = setInterval(tick, 100); }
+};
+function closeRun(){
+  if (T) clearInterval(T._iv);
+  T = null;
+  stopAlarm();
+  problem = null;
+  $("run").classList.remove("show");
+  $("finish").classList.remove("show");
+  $("btnClose").disabled = false;
+  $("btnStop").disabled = false;
+  $("btnPause").disabled = false;
+}
+$("btnStop").onclick = closeRun;
+$("btnClose").onclick = closeRun;
+
+/* ---------- 启动 ---------- */
+// 到点弹窗的答案键盘（点击输入，不依赖物理键盘）
+(function buildFinKeypad(){
+  const box = $("finKeypad");
+  ["1","2","3","4","5","6","7","8","9","0","⌫"].forEach(k => {
+    const b = document.createElement("button");
+    b.textContent = k;
+    b.onclick = () => {
+      const el = $("finAns");
+      if (k === "⌫") el.value = el.value.slice(0, -1);
+      else if (el.value.length < 4) el.value += k;
+      el.dispatchEvent(new Event("input"));
+    };
+    box.appendChild(b);
+  });
+})();
+$("startInput").value = fmtClock(startMinutes);
+buildStartWheels();
+buildDurWheels();
+render();
+// 每秒刷新“真实剩余”（结束时刻固定，剩余随时间减少）
+setInterval(() => {
+  if (!$("run").classList.contains("show") && !$("sheet").classList.contains("show")) refreshRealTime();
+}, 1000);
+// 每 30 秒：用户没手动改过就跟随当前时间
+setInterval(() => {
+  if (!startEdited && !$("run").classList.contains("show")){
+    startMinutes = minutesOfDay(new Date());
+    syncedMinutes = startMinutes;
+    render();
+  }
+}, 30000);
+</script>
+</body>
+</html>
