@@ -1,0 +1,54 @@
+name: Build IPA
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Build (iOS device, unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project OneTapCountdown.xcodeproj \
+            -target CountdownClock \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -configuration Release \
+            SYMROOT="$GITHUB_WORKSPACE/SymBuild" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build 2>&1 | tee build.log
+
+      - name: Package unsigned IPA
+        run: |
+          APP=$(find "$GITHUB_WORKSPACE/SymBuild" -type d -name "CountdownClock.app" -path "*Release-iphoneos*" | head -1)
+          echo "app: $APP"
+          rm -rf Payload && mkdir -p Payload
+          cp -R "$APP" Payload/
+          zip -qr CountdownClock.ipa Payload
+          ls -lh CountdownClock.ipa
+
+      - name: Publish IPA to ci-artifacts branch
+        if: always()
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@example.com"
+          git checkout -B ci-artifacts
+          mkdir -p out
+          [ -f CountdownClock.ipa ] && cp CountdownClock.ipa out/CountdownClock.ipa
+          [ -f build.log ] && cp build.log out/ipa-build.log
+          git add -A out
+          git commit -m "ipa run $GITHUB_RUN_ID" || echo "nothing to commit"
+          git push -f origin ci-artifacts
