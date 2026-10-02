@@ -60,9 +60,8 @@ jobs:
 
           run_case() {
             name=$1; wait=$2; shift 2
-            xcrun simctl terminate booted com.example.OneTapCountdown >/dev/null 2>&1
-            sleep 1
-            ( xcrun simctl launch booted com.example.OneTapCountdown "$@" >/dev/null 2>&1 & )
+            # --terminate-running-process：一步完成“杀旧 + 起新”
+            ( xcrun simctl launch --terminate-running-process booted com.example.OneTapCountdown "$@" >/dev/null 2>&1 & )
             sleep "$wait"
             xcrun simctl io booted screenshot "shots/$name.png"
             echo "shot: $name  args: $*"
@@ -72,10 +71,11 @@ jobs:
           ( xcrun simctl launch booted com.example.OneTapCountdown >/dev/null 2>&1 & )
           sleep 10
           xcrun simctl terminate booted com.example.OneTapCountdown
+          sleep 3
 
           # T1 主界面-日间（开始 = now+30min，结束 = now+1h）
           NOW=$(date +%s)
-          run_case 01-main-day 6 -start "$(date -r $((NOW+1800)) +%H:%M)"
+          run_case 01-main-day 10 -start "$(date -r $((NOW+1800)) +%H:%M)"
 
           # T2 主界面-夜间（02:30 在默认夜间区间内，默认 8 小时）
           run_case 02-main-night 6 -start 02:30

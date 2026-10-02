@@ -102,7 +102,10 @@ struct ContentView: View {
             }
             if debugNightOff { settings.night.isEnabled = false }
             if debugSheet != nil { showNightSettings = true }
-            if autoStart { startFromLaunchArguments() }
+            if autoStart {
+                // 延迟触发，避免在 onAppear 事务里立即 present 被 SwiftUI 丢弃
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { startFromLaunchArguments() }
+            }
         }
         .onChange(of: TimeUtils.minutesOfDay(startTime)) { minutes in
             didEditStartTime = (minutes != syncedMinutes)
