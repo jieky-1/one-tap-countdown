@@ -17,6 +17,33 @@ struct ContentView: View {
     @State private var timer: CountdownTimer?
     /// 每秒推进，用于刷新“真实剩余”
     @State private var now = Date()
+    /// 调试用：由启动参数 -autostart 触发直接进入倒计时页（仅 CI/模拟器演示，正常启动不带参数无影响）
+    @State private var autoStart = false
+
+    /// 支持启动参数（仅用于模拟器/CI 演示）：
+    ///   -start HH:mm   指定“倒计时开始”
+    ///   -duration <分钟> 指定倒计时时长
+    ///   -autostart     启动后直接进入倒计时页面
+    init() {
+        let args = ProcessInfo.processInfo.arguments
+        func value(_ key: String) -> String? {
+            guard let i = args.firstIndex(of: key), i + 1 < args.count else { return nil }
+            return args[i + 1]
+        }
+        var start = Date()
+        var edited = false
+        if let text = value("-start"), let minutes = TimeUtils.parseTime(text) {
+            start = TimeUtils.date(base: Date(), minutesOfDay: minutes)
+            edited = true
+        }
+        _startTime = State(initialValue: start)
+        _syncedMinutes = State(initialValue: TimeUtils.minutesOfDay(start))
+        _didEditStartTime = State(initialValue: edited)
+        if let text = value("-duration"), let minutes = Double(text) {
+            _customDuration = State(initialValue: minutes * 60)
+        }
+        _autoStart = State(initialValue: args.contains("-autostart"))
+    }
 
     private var startMinutes: Int { TimeUtils.minutesOfDay(startTime) }
     /// 真实倒计时：结束时刻 = 倒计时开始 + 时长；真实剩余 = 结束时刻 - 当前时间
@@ -57,6 +84,7 @@ struct ContentView: View {
                 startTime = Date()
                 syncedMinutes = TimeUtils.minutesOfDay(startTime)
             }
+            if autoStart { startFromLaunchArguments() }
         }
         .onChange(of: TimeUtils.minutesOfDay(startTime)) { minutes in
             didEditStartTime = (minutes != syncedMinutes)
@@ -241,6 +269,14 @@ struct ContentView: View {
         let cross = settings.night.crossesMidnight ? "（跨日）" : ""
         let belong = inNight ? "落在夜间区间内" : "不在夜间区间内"
         return "夜间区间 \(s) → \(e)\(cross)，当前开始时间 \(TimeUtils.formatClock(startMinutes)) \(belong)。"
+    }
+
+    /// -autostart 直接进入倒计时（按真实剩余）
+    private func startFromLaunchArguments() {
+        autoStart = false
+        guard timer == nil, !showCountdown, resolved.remaining > 0 else { return }
+        timer = CountdownTimer(total: resolved.remaining)
+        showCountdown = true
     }
 
     private func closeCountdown() {

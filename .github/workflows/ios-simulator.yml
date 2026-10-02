@@ -4,6 +4,27 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      start_time:
+        description: '倒计时开始(HH:mm)，留空=当前时间。例：08:00'
+        required: false
+        default: ''
+      duration_min:
+        description: '倒计时时长(分钟)，留空=按默认。例：10'
+        required: false
+        default: ''
+      auto_start:
+        description: '启动后直接进入倒计时页面'
+        type: boolean
+        default: false
+      wait1:
+        description: '第 1 张截图：启动后等待秒数'
+        required: false
+        default: '4'
+      wait2:
+        description: '第 2 张截图：启动后等待秒数'
+        required: false
+        default: '45'
 
 jobs:
   run:
@@ -15,12 +36,6 @@ jobs:
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode.app
-
-      - name: Xcode / simulator inventory
-        run: |
-          xcodebuild -version
-          xcrun simctl list runtimes
-          xcrun simctl list devices available | head -40
 
       - name: Build for simulator
         run: |
@@ -44,32 +59,44 @@ jobs:
           if [ -z "$UDID" ] || [ "$UDID" = "null" ]; then
             RT=$(xcrun simctl list runtimes -j | jq -r '[.runtimes[] | select(.name | test("^iOS"))][-1].identifier')
             DT=$(xcrun simctl list devicetypes -j | jq -r '[.devicetypes[] | select(.identifier | test("iPhone-15"))][0].identifier')
-            echo "creating device: $DT / $RT"
             UDID=$(xcrun simctl create "CI iPhone" "$DT" "$RT")
           fi
           echo "UDID=$UDID" >> "$GITHUB_ENV"
-          echo "udid=$UDID"
 
       - name: Boot simulator
         run: |
           xcrun simctl boot "$UDID" || true
           xcrun simctl bootstatus "$UDID" -b
-          xcrun simctl list devices | grep "$UDID"
 
-      - name: Install & launch app
+      - name: Install app
         run: |
           APP=$(find "$GITHUB_WORKSPACE/SymBuild" -type d -name "CountdownClock.app" | head -1)
           echo "app: $APP"
-          ls -d "$APP"
           xcrun simctl install booted "$APP"
-          xcrun simctl launch booted com.example.OneTapCountdown
-          sleep 8
 
-      - name: Take screenshot
+      - name: Launch app
         run: |
+          ARGS=""
+          [ -n "${{ inputs.start_time }}" ] && ARGS="$ARGS -start ${{ inputs.start_time }}"
+          [ -n "${{ inputs.duration_min }}" ] && ARGS="$ARGS -duration ${{ inputs.duration_min }}"
+          [ "${{ inputs.auto_start }}" = "true" ] && ARGS="$ARGS -autostart"
+          echo "launch args:$ARGS"
+          if [ -n "$ARGS" ]; then
+            xcrun simctl launch booted com.example.OneTapCountdown $ARGS
+          else
+            xcrun simctl launch booted com.example.OneTapCountdown
+          fi
+
+      - name: Screenshot 1
+        run: |
+          sleep "${{ inputs.wait1 || '4' }}"
           mkdir -p shots
-          xcrun simctl io booted screenshot shots/main.png
-          ls -l shots
+          xcrun simctl io booted screenshot shots/shot1.png
+
+      - name: Screenshot 2
+        run: |
+          sleep "${{ inputs.wait2 || '45' }}"
+          xcrun simctl io booted screenshot shots/shot2.png
 
       - name: Publish artifacts to ci-artifacts branch
         if: always()
@@ -78,7 +105,8 @@ jobs:
           git config user.email "ci-bot@example.com"
           git checkout -B ci-artifacts
           mkdir -p out
-          [ -f shots/main.png ] && cp shots/main.png out/app-screenshot.png
+          [ -f shots/shot1.png ] && cp shots/shot1.png out/shot1.png
+          [ -f shots/shot2.png ] && cp shots/shot2.png out/shot2.png
           [ -f build.log ] && cp build.log out/build.log
           git add -A out
           git commit -m "simulator run $GITHUB_RUN_ID" || echo "nothing to commit"
