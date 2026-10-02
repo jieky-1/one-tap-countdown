@@ -183,7 +183,7 @@ struct ContentView: View {
 
             Text(realTimeText)
                 .font(.footnote)
-                .foregroundStyle(resolved.remaining > 0 ? .secondary : .red)
+                .foregroundStyle(resolved.remaining > 0 ? Color.secondary : Color.red)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(18)
