@@ -16,55 +16,69 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode.app
 
-      - name: Pick an available iPhone simulator
-        id: sim
+      - name: Xcode / simulator inventory
         run: |
-          DEVICE=$(xcrun simctl list devices available -j \
-            | jq -r '[.devices | to_entries[] | .value[] | select(.name | test("^iPhone")) ] | sort_by(.name) | last | .name')
-          echo "device=$DEVICE" >> "$GITHUB_OUTPUT"
-          echo "picked: $DEVICE"
+          xcodebuild -version
+          xcrun simctl list runtimes
+          xcrun simctl list devices available | head -40
 
       - name: Build for simulator
         run: |
+          set -o pipefail
           xcodebuild \
             -project OneTapCountdown.xcodeproj \
             -target CountdownClock \
             -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
+            -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             -derivedDataPath DerivedData \
             CODE_SIGNING_ALLOWED=NO \
-            build
+            build 2>&1 | tee build.log
+
+      - name: Pick or create an iPhone simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | .value[]
+                      | select(.isAvailable == true)
+                      | select(.name | test("^iPhone"))][0].udid')
+          if [ -z "$UDID" ] || [ "$UDID" = "null" ]; then
+            RT=$(xcrun simctl list runtimes -j | jq -r '[.runtimes[] | select(.name | test("^iOS"))][-1].identifier')
+            DT=$(xcrun simctl list devicetypes -j | jq -r '[.devicetypes[] | select(.identifier | test("iPhone-15"))][0].identifier')
+            echo "creating device: $DT / $RT"
+            UDID=$(xcrun simctl create "CI iPhone" "$DT" "$RT")
+          fi
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          echo "udid=$UDID"
 
       - name: Boot simulator
         run: |
-          UDID=$(xcrun simctl list devices available -j \
-            | jq -r --arg n "${{ steps.sim.outputs.device }}" '[.devices | to_entries[] | .value[] | select(.name==$n)][0].udid')
-          echo "UDID=$UDID" >> "$GITHUB_ENV"
-          echo "udid=$UDID"
           xcrun simctl boot "$UDID" || true
           xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl list devices | grep "$UDID"
 
       - name: Install & launch app
         run: |
           APP="$GITHUB_WORKSPACE/DerivedData/Build/Products/Debug-iphonesimulator/CountdownClock.app"
           ls -d "$APP"
-          xcrun simctl install "$UDID" "$APP"
-          xcrun simctl launch "$UDID" com.example.OneTapCountdown
+          xcrun simctl install booted "$APP"
+          xcrun simctl launch booted com.example.OneTapCountdown
           sleep 8
 
       - name: Take screenshot
         run: |
           mkdir -p shots
-          xcrun simctl io "$UDID" screenshot shots/main.png
+          xcrun simctl io booted screenshot shots/main.png
           ls -l shots
 
-      - name: Push screenshot to ci-artifacts branch
+      - name: Publish artifacts to ci-artifacts branch
+        if: always()
         run: |
           git config user.name "ci-bot"
           git config user.email "ci-bot@example.com"
           git checkout -B ci-artifacts
-          cp shots/main.png app-screenshot.png
-          git add app-screenshot.png
-          git commit -m "simulator screenshot for run $GITHUB_RUN_ID"
+          mkdir -p out
+          [ -f shots/main.png ] && cp shots/main.png out/app-screenshot.png
+          [ -f build.log ] && cp build.log out/build.log
+          git add -A out
+          git commit -m "simulator run $GITHUB_RUN_ID" || echo "nothing to commit"
           git push -f origin ci-artifacts
