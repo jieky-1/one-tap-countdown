@@ -1,0 +1,635 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -project OneTapCountdown.xcodeproj -target CountdownClock -sdk iphonesimulator -destination "generic/platform=iOS Simulator" -configuration Debug SYMROOT=/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild CODE_SIGNING_ALLOWED=NO build
+
+Build settings from command line:
+    CODE_SIGNING_ALLOWED = NO
+    SDKROOT = iphonesimulator26.5
+    SYMROOT = /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild
+
+--- xcodebuild: WARNING: Ignoring provided run destination because no scheme was passed.
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'CountdownClock' in project 'OneTapCountdown' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: a4b1d49b47e5e4346fd15a89c160e0aa
+Build description path: /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/XCBuildData/a4b1d49b47e5e4346fd15a89c160e0aa.xcbuilddata
+ClangStatCache /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+
+CreateBuildDirectory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    builtin-create-build-directory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild
+
+CreateBuildDirectory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    builtin-create-build-directory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/OneTapCountdown-a7809c4562938671885ef6bc5b18740f-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/OneTapCountdown-a7809c4562938671885ef6bc5b18740f-VFS-iphonesimulator/all-product-headers.yaml
+
+CreateBuildDirectory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/ExplicitPrecompiledModules
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    builtin-create-build-directory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    builtin-create-build-directory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown/OneTapCountdown.xcodeproj
+    builtin-create-build-directory /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/empty-CountdownClock.plist (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/empty-CountdownClock.plist
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_const_extract_protocols.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftConstValuesFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.LinkFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-OutputFileMap.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_const_extract_protocols.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftConstValuesFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.LinkFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-OutputFileMap.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.hmap
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyStaticMetadataFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyMetadataFileList (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-non-framework-target-headers.hmap (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    write-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-non-framework-target-headers.hmap
+
+MkDir /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /bin/mkdir -p /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app
+
+ProcessInfoPlistFile /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Info.plist /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/empty-CountdownClock.plist (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-infoPlistUtility /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/empty-CountdownClock.plist -producttype com.apple.product-type.application -genpkginfo /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Info.plist
+
+SwiftDriver CountdownClock normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-SwiftDriver -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+SwiftDriver CountdownClock normal arm64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-SwiftDriver -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftShims-6DIYXRK56OO8WKHAAUO66JY6C.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ptrauth-7RODZAE5480LNBAVEAGG7EX3D.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ptrcheck-DK677PWU3ICDC0D92C057O6HC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ptrauth-267NF2Z2JYFNT0KNIL983VTPW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stddef-4WKDE3IKB469Q8A9FAQX0RB6O.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdbool-9DXFREKVR34UKBE75WCKJKI3S.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_AvailabilityInternal-4VUU4XSE1DCAA5C7NOSPPFVCO.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stddef-8OPK79KFE46MBALI3Q44XDUFM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ptrcheck-B1CV32ATX1NORWC8RPWVUDIX4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_float-4ZPM05147TMT8YKSBDKMS1157.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/DeveloperToolsSupport-BXXF732ISTRXOIWITFF7IZ7WD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftShims-8Q8SM1LEF6TIYWSRTK607MVZZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation1-67RT8VH3T3NSIFKNAM25V12FO.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdbool-2XTN48G44ENSB1XPX2XYOYY3I.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_AvailabilityInternal-27L454J6W17K41DRE7VYF8C4O.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdarg-954SG40WBTDV7ZYI1MMZAW52S.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/DeveloperToolsSupport-9IW1PV2D4OBK1SIUZPNYW9K6D.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_limits-ACCB7QML9VJ33VDM8V2EU4EFR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdarg-5I198QKFI2A9RHN4NJQ7S3Y2Z.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_SwiftConcurrencyShims-5HIJ2ZJKE0HYCWR3NILQG3UZO.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_SwiftConcurrencyShims-A9KWXSOYB0O0VHKNNLZGRUMD3.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation1-B1LFQ88X1B90P3JGCJA3RKIZE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation2-9OI7ZSW2IYATJHOGA6FIJ11A8.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_float-AW4EJ090MHYQ21B6Z44A0RZKZ.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation2-AQFQ5HD72AUZ79CBI8FLXPTQ2.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_limits-DT7SPOTPK7CGWVM6HS4O6HUVU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_tgmath-6DA4CKEDRSAW380IT8G82R4LL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/sys_types-6CIVECGPE24PVAG1HZWP6FMEH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdint-6Q0YF77V9QKEEFQEFX9O56XGT.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdint-D45W036JCPI1RUKCVGOND8AOP.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_tgmath-4E13FXE13V9F2752QDQDI2AKL.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/sys_types-76QNIM5YALVU6LRLTT5DAORKP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdatomic-1AQ70P7V16BGUCLSRBKQJ3AKI.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_stdatomic-3EKE2NS6HCV1CEULN235EPYRC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation3-8N0TOD1RT7Y7MHP1R3ID0D1Y0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_intrinsics-2DEFZE45YJCXYOKJQQCUDPC0K.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_DarwinFoundation3-F4KXPN65MXFZM1CARCM4X3YIL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_inttypes-2S85ZQ8FJUKDS30Q6I1S5V6L.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_intrinsics-9H1H1U13VLVPBTJ7IRDB2KNNA.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/_Builtin_inttypes-AG3MOBTURLWSUNHNTI8K8UZ8Y.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Darwin-9YQSRIMESB7QLTWUL8J2M99O4.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Darwin-5KKODT9WTYLN357TYINMEBBVE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/simd-7WU6TGYIMDFABX04S5JK88MSL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/MachO-5H0BKJ75A5WX7RJWJKI92JNSA.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/simd-TDDB6N636PTVKPRMQVPYQAUI.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ObjectiveC-5N5OQJ27OFKA54GSRMSZ5L093.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/MachO-2AAL16M27EFFRHVRAEM3BH8NI.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os_object-5RLW406GKW4WCRQUBJ8EOSNAL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ObjectiveC-DFIIOHMZDZHUMS4LMKVUXXQAW.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os_workgroup-5RVNR04H01RCMSEDIPLYT7NV0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os_object-AH0MNFZS88QUI1QESEVO8R6R9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Spatial-EWIESL4SLXFUCGB3ST2QS9QBI.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Dispatch-EO4S5QLOFZXWS2WBB9XCTOAXK.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Spatial-45YAIQZ24TMD9AWSWUCI8QSFS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os_workgroup-AWI3XR8J9X9YFMGFGFFY7ZIHN.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/XPC-882ZB3354D3NV2XD3SCQXHORC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Dispatch-DWCMUROIHPA1C2MF40J6IDLD3.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreFoundation-171WLC37CUOUBZ8O9HSK1WLB5.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/dnssd-BBSKPJKNFBFSBIAB6BQHN50BP.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os-ALV4D00E9W21BELCLJ0R6ZASP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/XPC-84P2LS4QOY2NYIWN2ZA6RGS07.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreFoundation-6T9P84TZCF9LVBDEWUTL46B72.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CFNetwork-8IDMNRHB1RE7UCLF9RQOM999K.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreAudioTypes-BTYP6LGAOLBI1GA3LEC8DARIV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/dnssd-2JHAA295AN3WOFZJ83E39LBPZ.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Security-855A82UTOCCXCJHI8UTOPH2OP.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreAudio-EVFT9D7UGNEUFF5XK4PSF2E75.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Security-AMWFLM6U2MOC35FD1K12WEM2T.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CFNetwork-5YBIDF5KW9C2OEUI10SWSHFP2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreGraphics-96YAS75ZWKTO25SSGWZ6TN6U8.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Foundation-73ITH8FF3UQ5VOQ50K2ZLTMM0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/os-2EEU49VWFBRHWKFC8RTEOCFAU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Foundation-3V6OAN7CVXQOQJBTRDI73GX83.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ImageIO-7UMMU6Z1VPH2T52YN9VLLRYQJ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreAudioTypes-6UTTULH0DUFJ1EWUATRNYUQFA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreText-6CHS638NRG0V8R9SMN3I2LSGP.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreGraphics-BW2F6B2RI8OA13MZY67TFGZ2N.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreAudio-JR8NILEZFDEMNJIMI6O3GQ87.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/OpenGLES-41TVL4C0YU9CH209M5ZW1ZVDZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/OpenGLES-78RO3L4H929RZ86Y4FCJ12OY3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Network-7070WGUM930F7JQYARH7NK230.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/ImageIO-3N371G9LJX55C0DXJNW6QCAYU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Symbols-A4KBZJF0AC2D9NVQD6ZDO8N5G.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreTransferable-7Q9R7O4ALNOKIENOYT4TIBEEW.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/OSLog-7OAI2D3SP2TN28NH7G9KZRY0Z.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Accessibility-4Y6EI5PYUFLN3MHCYDJ1FK4VK.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/FileProvider-8VEDHE96TWTEPRMIZHQ3TIRM4.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/DataDetection-6KZZ6FHFR58JEQSI0EL9P91F8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UniformTypeIdentifiers-83JGKJI50RE919SBWH0M70QCK.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreData-56WAKVQ00ZEWJ5KYGBGAOUD5G.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreData-EPZ2DTZJHWYKDUWO2O2X14PSP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/DataDetection-E9MSDTU2IQPLK5F9YRSY43A1A.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Symbols-AJ7ESB44NGZHIX9ANW0Y5KE0K.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Network-4WTO3ECY93RO8J1GY9831XX2C.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UniformTypeIdentifiers-DHWOGRC3O448EZXEABLHSGBXN.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/FileProvider-5UFZ05AJ13IO49PZOYPY0OAD1.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UIUtilities-DUNDKYMLSEBM7RKY6WSVVQ36.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreMIDI-5DKDBT08AK0HTQBVYN4N3EKWL.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/IOSurface-42RUAHZ71AWGPM279K4VL4O27.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVRouting-F0XBV514ZWBQLQO6HHMEZ0SUZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/OSLog-TK69D6ARNO7TVZS2F24MU6HV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AudioToolbox-784HKX91L7E07W3K8UM6IDCLJ.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Metal-CNI4BX57R236J3HSG7TFIMCFF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Accessibility-DK39N57A52NJROTNR8FB5P482.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVRouting-5ZGLZP71KOKTV93Q3GB1EMEFE.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreTransferable-EN02GOOB8EMVSFQJCT30B841P.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UserNotifications-ANFFHZE82ATAQSO5OLW452QYX.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreVideo-AFJGASEJQN2WUKQ0XMDFWPC15.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/IOSurface-DO9N1CEKMB98UAMBUE8CVLOXD.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreMIDI-1KY4UQFB3LE1HA97KO6RQJXOQ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UserNotifications-21093XXE1HR4COEVTBNIBTLF6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/Metal-6HWV68PNJRB342BURJZF2FRGU.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/QuartzCore-66J619PN3937PIXYPEQS6B48B.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AudioToolbox-9X4IR2EX4L3TV67IVORFKLMVA.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreMedia-BJ0FY3LZTI75FQ08ZBKMVZ12H.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreImage-CLPEQAEL1OE6EK94I671IBXS6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreVideo-EZJ2NCSSYG94UYKFML06SSPVH.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UIUtilities-2F9O9DTQSHOI5EPVT0REWYJUD.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/MediaToolbox-E5476EGEK4PASQ6YDHGXBBSLT.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVFAudio-34OWWI4NJOW5JUDMYQT053Q8U.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/QuartzCore-2FZ2RATK0S6Z2N4QGYH7L8N7R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreImage-43Y2U3FOPTVUHN9P2B4EZUNO9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreMedia-CP1JTLMB65HOFGGP0MWXAO7N.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftUICore-8NGA5KCRAN5GBEFZQQ1FMIFGB.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVFoundation-1BEBK5T1666O93WE0X5R2UELE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UIKit-6W620TO5M6HOOEKNJ4PR6T8AC.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/CoreText-2SZ813V48FHWK0XEH0N8O12YX.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/MediaToolbox-CUHCC2MN9R4IZB6WUBM6IDYIZ.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftUICore-3BZTJJHF180M8UIYDNNQZX239.pcm
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/UIKit-358WR1G0JSRJ9KKB8M3VLJU20.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVFAudio-5C77EQKBGJIWMPZC6UBIG0XDQ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/AVFoundation-CT526QKUTOWFEHLVS06DWNIWL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftUI-6J8N2QCWTT6D0LX48RK1GVY59.pcm
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ CountdownClock (in target 'CountdownClock' from project 'OneTapCountdown')
+EmitSwiftModule normal arm64 (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 Compiling\ ContentView.swift,\ TimeUtils.swift,\ TimeInputView.swift,\ NightIntervalSettingsView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/ContentView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/TimeUtils.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/TimeInputView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/ContentView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/TimeUtils.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/TimeInputView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 Compiling\ AlarmController.swift,\ CountdownTimer.swift,\ AppSettings.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AlarmController.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/CountdownTimer.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AlarmController.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/CountdownTimer.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftExplicitDependencyGeneratePcm x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules/SwiftUI-9A0GM02HM14ELWC8WJWGXMBBL.pcm
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for CountdownClock (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriver\ Compilation\ Requirements CountdownClock normal arm64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal x86_64 Emitting\ module\ for\ CountdownClock (in target 'CountdownClock' from project 'OneTapCountdown')
+
+EmitSwiftModule normal x86_64 (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+SwiftDriverJobDiscovery normal x86_64 Emitting module for CountdownClock (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriver\ Compilation\ Requirements CountdownClock normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftdoc (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftdoc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.abi.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.abi.json /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+SwiftMergeGeneratedHeaders /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/CountdownClock-Swift.h /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-Swift.h /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-Swift.h (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-swiftHeaderTool -arch arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-Swift.h -arch x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-Swift.h -o /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/CountdownClock-Swift.h
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.swiftmodule /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.swiftmodule
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.swiftdoc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftdoc (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftdoc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.swiftdoc
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.abi.json /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.abi.json (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.abi.json /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/x86_64-apple-ios-simulator.abi.json
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftsourceinfo (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftsourceinfo /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo
+
+Copy /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftsourceinfo (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftsourceinfo /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftCompile normal x86_64 Compiling\ CountdownRunningView.swift,\ OneTapCountdownApp.swift,\ DurationWheel.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/CountdownRunningView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/OneTapCountdownApp.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/CountdownRunningView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/OneTapCountdownApp.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling AlarmController.swift, CountdownTimer.swift, AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftCompile normal x86_64 Compiling\ ContentView.swift,\ TimeUtils.swift,\ TimeInputView.swift,\ NightIntervalSettingsView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/ContentView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/TimeUtils.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/TimeInputView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/ContentView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/TimeUtils.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/TimeInputView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 Compiling\ CountdownRunningView.swift,\ OneTapCountdownApp.swift,\ DurationWheel.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/CountdownRunningView.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/OneTapCountdownApp.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/CountdownRunningView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/OneTapCountdownApp.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal arm64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Views/DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling ContentView.swift, TimeUtils.swift, TimeInputView.swift, NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftCompile normal x86_64 Compiling\ AlarmController.swift,\ CountdownTimer.swift,\ AppSettings.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AlarmController.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/CountdownTimer.swift /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AlarmController.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/CountdownTimer.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftCompile normal x86_64 /Users/runner/work/one-tap-countdown/one-tap-countdown/CountdownClock/Models/AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    
+
+SwiftDriverJobDiscovery normal x86_64 Compiling CountdownRunningView.swift, OneTapCountdownApp.swift, DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriverJobDiscovery normal x86_64 Compiling ContentView.swift, TimeUtils.swift, TimeInputView.swift, NightIntervalSettingsView.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriverJobDiscovery normal arm64 Compiling CountdownRunningView.swift, OneTapCountdownApp.swift, DurationWheel.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriver\ Compilation CountdownClock normal arm64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-Swift-Compilation -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/Binary/CountdownClock normal arm64 (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios16.0-simulator -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -filelist /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.swiftmodule @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock-linker-args.resp -o /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/Binary/CountdownClock
+
+SwiftDriverJobDiscovery normal x86_64 Compiling AlarmController.swift, CountdownTimer.swift, AppSettings.swift (in target 'CountdownClock' from project 'OneTapCountdown')
+
+SwiftDriver\ Compilation CountdownClock normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-Swift-Compilation -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name CountdownClock -Onone @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios16.0-simulator -g -Xfrontend -serialize-debugging-options -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/SwiftExplicitPrecompiledModules -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule -validate-clang-modules-once -clang-build-session-file /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/C/org.llvm.clang/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-generated-files.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-own-target-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock-project-headers.hmap -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources-normal/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources/x86_64 -Xcc -I/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-Swift.h -working-directory /Users/runner/work/one-tap-countdown/one-tap-countdown -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/Binary/CountdownClock normal x86_64 (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target x86_64-apple-ios16.0-simulator -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -F/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator -filelist /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.swiftmodule @/Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock-linker-args.resp -o /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/Binary/CountdownClock
+
+CreateUniversalBinary /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/CountdownClock normal arm64\ x86_64 (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo -create /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/Binary/CountdownClock /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/Binary/CountdownClock -output /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/CountdownClock
+
+ExtractAppIntentsMetadata (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.109.0.WzhFpb/Metal.xctoolchain --module-name CountdownClock --sdk-root /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 16.0 --bundle-identifier com.example.OneTapCountdown --output /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app --target-triple arm64-apple-ios16.0-simulator --target-triple x86_64-apple-ios16.0-simulator --binary-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/CountdownClock --dependency-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock_dependency_info.dat --dependency-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock_dependency_info.dat --stringsdata-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --stringsdata-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftFileList --source-file-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftFileList --metadata-file-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyMetadataFileList --static-metadata-file-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyStaticMetadataFileList --swift-const-vals-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/arm64/CountdownClock.SwiftConstValuesFileList --swift-const-vals-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/Objects-normal/x86_64/CountdownClock.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-10-02 11:43:10.754 appintentsmetadataprocessor[1867:9385] Starting appintentsmetadataprocessor export
+2026-10-02 11:43:10.766 appintentsmetadataprocessor[1867:9385] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+CopySwiftLibs /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/CountdownClock --scan-folder /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Frameworks --scan-folder /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/PlugIns --scan-folder /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/SystemExtensions --scan-folder /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Extensions --platform iphonesimulator --toolchain /var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.109.0.WzhFpb/Metal.xctoolchain --toolchain /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+Ignoring --strip-bitcode because --sign was not passed
+
+AppIntentsSSUTraining (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Info.plist --temp-dir-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/ssu --bundle-id com.example.OneTapCountdown --product-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app --extracted-metadata-path /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Metadata.appintents --metadata-file-list /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/OneTapCountdown.build/Debug-iphonesimulator/CountdownClock.build/CountdownClock.DependencyMetadataFileList --source-file /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app/Info.plist --archive-ssu-assets
+2026-10-02 11:43:10.818 appintentsnltrainingprocessor[1868:9389] Parsing options for appintentsnltrainingprocessor
+2026-10-02 11:43:10.818 appintentsnltrainingprocessor[1868:9389] Starting AppIntents SSU YAML Generation
+2026-10-02 11:43:10.824 appintentsnltrainingprocessor[1868:9389] No AppShortcuts found - Skipping.
+
+RegisterExecutionPolicyException /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-RegisterExecutionPolicyException /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app
+
+Validate /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    builtin-validationUtility /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app (in target 'CountdownClock' from project 'OneTapCountdown')
+    cd /Users/runner/work/one-tap-countdown/one-tap-countdown
+    /usr/bin/touch -c /Users/runner/work/one-tap-countdown/one-tap-countdown/SymBuild/Debug-iphonesimulator/CountdownClock.app
+
+warning: ONLY_ACTIVE_ARCH=YES requested with multiple ARCHS and no active architecture could be computed; building for all applicable architectures (in target 'CountdownClock' from project 'OneTapCountdown')
+** BUILD SUCCEEDED **
+
